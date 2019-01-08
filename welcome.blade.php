@@ -85,7 +85,7 @@
                 </div>
                 <form method="GET" enctype="multipart/form-data">
                 <div class="links">
-<!------------- Prints 1 to 31 within a dropdown ----------------->
+<!-- Prints 1 to 31 within a dropdown -->
                     <select name="dd" size='1'>
                         <?php
                         for ($i = 1; $i < 32; $i++) {
@@ -97,7 +97,7 @@
                         }
                     ?>    
                     </select>
- <!---------------- Prints January to December within a dropdown ------>
+ <!-- Prints January to December within a dropdown -->
                     <select name="mm" size='1'>
                         <?php
                         for ($i = 0; $i < 12; $i++) {
@@ -112,7 +112,7 @@
                         }
                     ?>    
                     </select>
- <!------------- Options for Currency ---------->
+ <!-- Options for Currency -->
                     <select name="crnc">
                         <option name="crnc" value="CAD">CAD</option>
                         <option name="crnc" value="EUR">EUR</option>
@@ -120,7 +120,7 @@
                         <option name="crnc" value="USD">USD</option>
                     </select>
                     <input name="submit" type="submit" value="submit">
-  <!----------- PHP that gets information entered and put it into a URL for Fixer.io to display relevent information ----->                  
+  <!-- PHP that gets information entered and put it into a URL for Fixer.io to display relevent information -->                  
                     <?php
                             if ( isset( $_GET['submit'] ) ) {
                             $month = $_GET['mm'];
