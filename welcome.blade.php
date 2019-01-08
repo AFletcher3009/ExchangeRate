@@ -6,10 +6,10 @@
 
         <title>Laravel</title>
 
-        <!-- Fonts -->
+        <!-- Font -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
 
-        <!-- Styles -->
+        <!-- Page Styling -->
         <style>
             html, body {
                 background-color: #fff;
@@ -85,6 +85,7 @@
                 </div>
                 <form method="GET" enctype="multipart/form-data">
                 <div class="links">
+<!------------- Prints 1 to 31 within a dropdown ----------------->
                     <select name="dd" size='1'>
                         <?php
                         for ($i = 1; $i < 32; $i++) {
@@ -96,6 +97,7 @@
                         }
                     ?>    
                     </select>
+ <!---------------- Prints January to December within a dropdown ------>
                     <select name="mm" size='1'>
                         <?php
                         for ($i = 0; $i < 12; $i++) {
@@ -109,7 +111,8 @@
                             }
                         }
                     ?>    
-                    </select>                
+                    </select>
+ <!------------- Options for Currency ---------->
                     <select name="crnc">
                         <option name="crnc" value="CAD">CAD</option>
                         <option name="crnc" value="EUR">EUR</option>
@@ -117,16 +120,9 @@
                         <option name="crnc" value="USD">USD</option>
                     </select>
                     <input name="submit" type="submit" value="submit">
+  <!----------- PHP that gets information entered and put it into a URL for Fixer.io to display relevent information ----->                  
                     <?php
-                        function Redirect($link, $permanent = false){
-                            if (headers_sent() === false)
-                            {
-                                header('Location: ' . $link, true, ($permanent === true) ? 301 : 302);
-                            }
-                            die();
-                        }
-                        
-                        if ( isset( $_GET['submit'] ) ) {
+                            if ( isset( $_GET['submit'] ) ) {
                             $month = $_GET['mm'];
                             $day = $_GET['dd'];
                             $key = "?access_key=651234578b00ac0a922bfd255bd2fa29&symbols=";
