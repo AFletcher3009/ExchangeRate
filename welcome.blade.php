@@ -128,14 +128,53 @@
                             $key = "?access_key=651234578b00ac0a922bfd255bd2fa29&symbols=";
                             $crnc = $_GET['crnc'];
                             $json_string = "http://data.fixer.io/api/2018-$month-$day$key$crnc";
-                            $jsondata = file_get_contents($json_string);
-                            $obj = json_decode($jsondata,true);
+                            $array = file_get_contents($json_string);
+                            $obj = json_decode($array,true);
                             echo "<pre>";
-                            print_r($obj);
+                            //print $array;
+                            //$data = json_encode($obj);
+                            //print $jsondata;
+                            function build_table($array){
+                                function my_remove_array_item( $array, $item ) {
+                                    $index = array_search($item, $array);
+                                    if ( $index !== false ) {
+                                        unset( $array[$index] );
+                                    }
+                                
+                                    return $array;
+                                }
+                               
+                                // start table
+                                $html = '<table>';
+                                // header row
+                                $html .= '<tr>';
+                                foreach($array[0] as $key=>$value){
+                                        //$items = array( $value);
+                                        //$replace = array('[', ']', '=', '>');
+                                        //$remove = my_remove_array_item( $items, 'success','timestamp','historical','base','date','rates' );
+                                        $string = str_replace(str_split('\/:*=?"<>|'), ' ', $value); // Replaces all spaces with hyphens.
+                                        $html .= '<th>' . print_r($string) . '</th>';
+                                    }
+                                $html .= '</tr>';
+                                // data rows
+                                foreach( $array as $key=>$value){
+                                    $html .= '<tr>';
+                                    foreach($value as $key2=>$value2){
+                                        $exlcuded_words = array( 'success','timestamp','historical','base','date','rates', '[', ']', '=');
+                                        $replace = array_fill_keys($exlcuded_words,'');
+                                        $html .= '<td>' . print_r(str_replace(array_keys($replace),$replace, $value2)) . '</td>';
+                                    }
+                                    $html .= '</tr>';
+                                }
+                                // finish table and return it
+                                $html .= '</table>';
+                                return $html;
+                            }
+                            $array = array($obj);
+                            echo build_table($array);
                         }
-                        
-                    ?>
-                </div>
+                            ?>
+                    </div>
                 </form>
             </div>
         </div>
