@@ -140,32 +140,24 @@
                                     if ( $index !== false ) {
                                         unset( $array[$index] );
                                     }
-                                
                                     return $array;
                                 }
-                               
                                 // start table
                                 $html = '<table>';
-                                // header row
                                 $html .= '<tr>';
-                                foreach($array[0] as $key=>$value){
-                                        //$items = array( $value);
-                                        //$replace = array('[', ']', '=', '>');
-                                        //$remove = my_remove_array_item( $items, 'success','timestamp','historical','base','date','rates' );
-                                        $string = str_replace(str_split('\/:*=?"<>|'), ' ', $value); // Replaces all spaces with hyphens.
-                                        $html .= '<th>' . print_r($string) . '</th>';
-                                    }
-                                $html .= '</tr>';
-                                // data rows
-                                foreach( $array as $key=>$value){
-                                    $html .= '<tr>';
-                                    foreach($value as $key2=>$value2){
-                                        $exlcuded_words = array( 'success','timestamp','historical','base','date','rates', '[', ']', '=');
-                                        $replace = array_fill_keys($exlcuded_words,'');
-                                        $html .= '<td>' . print_r(str_replace(array_keys($replace),$replace, $value2)) . '</td>';
-                                    }
-                                    $html .= '</tr>';
-                                }
+                                //displays the exchange rate you have chose with your last birthday in the correct format
+                                $rates = $_GET['crnc'];
+                                $z = 0;
+                                echo 'Exchange rate for '.$rates. ': ';
+                                echo $array[$z]['rates'][$rates];
+                                echo '</br>';
+                                echo 'Your last birthday: ';
+                                $date = $array[$z]['date'];
+
+                                $time = strtotime(sprintf('%d months', $date));   
+                                $label = $_GET['dd'].' '.date('F', $time);
+
+                                echo $label.' 2017';
                                 // finish table and return it
                                 $html .= '</table>';
                                 return $html;
